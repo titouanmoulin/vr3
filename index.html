@@ -1,0 +1,86 @@
+<html>
+
+<head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kylebakerio/ada-water/ada-water.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-asset>
+            <img id="sky" src="assets/sky.png">
+            <a-asset-entity id="cloud" src="./assets/Cloud.glb"></a-asset-entity>
+            <a-asset-entity id="necklace" src="./assets/Necklace.glb"></a-asset-entity>
+            <a-asset-entity id="laputa1" src="./assets/Laputa_tours.glb"></a-asset-entity>
+            <a-asset-entity id="laputa2" src="./assets/Laputa_tours2.glb"></a-asset-entity>
+            <a-asset-entity id="laputa3" src="./assets/Laputa_tours3.glb"></a-asset-entity>
+            <a-asset-entity id="laputa4" src="./assets/Laputa_tours4.glb"></a-asset-entity>
+            <a-asset-entity id="laputa5" src="./assets/Laputa_tours5.glb"></a-asset-entity>
+            <a-asset-entity id="laputa6" src="./assets/Laputa_tours6.glb"></a-asset-entity>
+            <a-asset-entity id="laputa7" src="./assets/Laputa_tours7.glb"></a-asset-entity>
+            <a-asset-entity id="laputa8" src="./assets/Laputa_tours8.glb"></a-asset-entity>
+            <a-asset-entity id="laputa9" src="./assets/Laputa_tours9.glb"></a-asset-entity>
+            <a-asset-entity id="laputa10" src="./assets/Laputa_tours10.glb"></a-asset-entity>
+            <a-asset-entity id="laputa11" src="./assets/Laputa_tours11.glb"></a-asset-entity>
+            <a-asset-entity id="laputa12" src="./assets/Laputa_tours12.glb"></a-asset-entity>
+            <a-asset-entity id="laputa13" src="./assets/Laputa_tours13.glb"></a-asset-entity>
+            <a-asset-entity id="laputa14" src="./assets/Laputa_mur1.glb"></a-asset-entity>
+            <a-asset-entity id="laputa15" src="./assets/Laputa_mur2.glb"></a-asset-entity>
+            <a-asset-entity id="laputa16" src="./assets/Laputa_mur3.glb"></a-asset-entity>
+            <a-asset-entity id="laputa17" src="./assets/Laputa_pilliers.glb"></a-asset-entity>
+            <a-asset-entity id="laputa18" src="./assets/Laputa_arbre.glb"></a-asset-entity>
+            <a-asset-entity id="laputa19" src="./assets/Laputa_socle.glb"></a-asset-entity>
+
+        </a-asset>
+
+        <a-entity id="laputa" scale="5 5 5" position="1336.097 -1021.705 1405.688">
+
+            <a-entity gltf-model="#laputa1" shadow></a-entity>
+            <a-entity gltf-model="#laputa2" shadow></a-entity>
+            <a-entity gltf-model="#laputa3" shadow></a-entity>
+            <a-entity gltf-model="#laputa4" shadow></a-entity>
+            <a-entity gltf-model="#laputa5" shadow></a-entity>
+            <a-entity gltf-model="#laputa6" shadow></a-entity>
+            <a-entity gltf-model="#laputa7" shadow></a-entity>
+            <a-entity gltf-model="#laputa8" shadow></a-entity>
+            <a-entity gltf-model="#laputa9" shadow></a-entity>
+            <a-entity gltf-model="#laputa10" shadow></a-entity>
+            <a-entity gltf-model="#laputa11" shadow></a-entity>
+            <a-entity gltf-model="#laputa12" shadow></a-entity>
+            <a-entity gltf-model="#laputa13" shadow></a-entity>
+            <a-entity gltf-model="#laputa14" shadow></a-entity>
+            <a-entity gltf-model="#laputa15" shadow></a-entity>
+            <a-entity gltf-model="#laputa16" shadow></a-entity>
+            <a-entity gltf-model="#laputa17" shadow></a-entity>
+            <a-entity gltf-model="#laputa18" shadow></a-entity>
+            <a-entity gltf-model="#laputa19" shadow></a-entity>
+        </a-entity>
+        <!-- <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 0"></a-entity>
+             <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 0" rotation="0 90 0"></a-entity>
+             <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="0 -4000 0"></a-entity>
+             <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 -7000" rotation="0 45 0"></a-entity> -->
+
+
+        <a-sky material="src: #sky" scale="15 15 15"></a-sky>
+
+        <a-entity light="type: ambient; color: #ffead2; intensity: 1"></a-entity>
+        <a-light type="directional" light="castShadow:true;" position="-8 6 -20" intensity="0.5"
+            shadow-camera-automatic="#objects"></a-light>
+
+        <a-entity id="rig" movement-controls position="0 0 0">
+            <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true"
+                wasd-controls="fly: true; acceleration: 3000" cursor="rayOrigin: mouse">
+
+            </a-entity>
+            <a-entity oculus-touch-controls="hand: left" laser-controls="hand: left"
+                raycaster="objects: .clickable; far: 10; showLine: true"></a-entity>
+            <a-entity oculus-touch-controls="hand: right" laser-controls="hand: right"
+                raycaster="objects: .clickable; far: 10; showLine: true"></a-entity>
+            <a-entity gltf-model="#necklace" scale="10 10 10" position="0 0 -0.2" rotation="0 180 0"></a-entity>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html>
