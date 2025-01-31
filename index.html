@@ -34,11 +34,13 @@
             <a-asset-entity id="laputa19" src="./assets/Laputa_socle.glb"></a-asset-entity>
             <a-asset-entity id="laputa20" src="./assets/Laputa_buissons.glb"></a-asset-entity>
             <img id="eau" src="assets/water.jpg">
+            <a-asset-entity id="robot" src="./assets/Robot.glb"></a-asset-entity>
 
         </a-asset>
 
         <a-entity id="laputa" scale="5 5 5" position="1336.097 -1021.705 1405.688">
 
+            <!-- Chateau -->
             <a-entity gltf-model="#laputa1" shadow></a-entity>
             <a-entity gltf-model="#laputa2" shadow></a-entity>
             <a-entity gltf-model="#laputa3" shadow></a-entity>
@@ -59,6 +61,8 @@
             <a-entity gltf-model="#laputa18" shadow></a-entity>
             <a-entity gltf-model="#laputa19" shadow></a-entity>
             <a-entity gltf-model="#laputa20" shadow></a-entity>
+
+            <!-- Eau -->
             <a-plane position="-175.973 202 -43.298" scale="20 20 20" material="src: #eau; roughness: 1" rotation="-90 0 0"></a-plane>
             <a-plane position="-140.327 202 67.936" scale="20 20 20"  rotation="-90 0 0" material="src: #eau; roughness: 1"></a-plane>
             <a-plane position="-159.761 202 -137.939" scale="20 20 20"  rotation="-90 0 0" material="src: #eau; roughness: 1"></a-plane>
@@ -69,9 +73,14 @@
             <a-plane position="-78.810 202 -55.075" scale="44.376 134.943 20"  rotation="-90 0 0" material="src: #eau; roughness: 1; repeat: 1 4"></a-plane>
             <a-plane position="16.163 202 -189.275" scale="75.964 196.030 20"  rotation="-90 -43.303 0" material="src: #eau; roughness: 1; repeat: 1 4"></a-plane>
             <a-plane position="-75.603 202 -218.073" scale="38.226 83.344 20"  rotation="-90 45 0" material="src: #eau; roughness: 1; repeat: 1 3"></a-plane>
-            <!-- <a-water width="2" length="2" scale="50 50 0.1" opacity="1" voronoi-points="8" base-color="#376c9c" position="-175.973 202 -43.298"></a-water> -->
+
+            <!-- Objets à collectionner -->
+            <a-entity  gltf-model="#robot" position="-44.307 202.671 -295.474" rotation="0 133.280 0" shadow class="clickable heads" interactive visible="true"></a-entity>
+            <a-entity  gltf-model="#robot" position="-142.294 201.017 69.144" rotation="-28.160 124.335 34.652" shadow class="clickable heads" interactive visible="true"></a-entity>
+            <a-entity  gltf-model="#robot" position="-118.445 202.671 -0.312" rotation="0 163.972 0" shadow class="clickable heads" interactive visible="true"></a-entity>
+            <a-entity gltf-model="#robot" position="-235.493 202.671 -265.651" rotation="0 163.972 0" shadow class="clickable heads" interactive visible="true"></a-entity>
+            <a-entity  gltf-model="#robot" position="-87.675 202.671 -184.660" rotation="0 -103.680 0" shadow class="clickable heads" interactive visible="true"></a-entity>
         </a-entity>
-        <!-- <a-water width="200" length="200" scale="8 8 0.1" opacity="1" voronoi-points="5" base-color="#376c9c" position="1336.097 0 1405.688"></a-water> -->
             
         <!-- <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 0"></a-entity>
              <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 0" rotation="0 90 0"></a-entity>
@@ -84,18 +93,65 @@
         <a-light type="directional" light="castShadow:true;" position="-8 6 -20" intensity="0.5"
             shadow-camera-automatic="#objects"></a-light>
 
-        <a-entity id="rig" movement-controls="speed: 1" position="0 0 0" >
-            <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true"
-            
-                >
+        <a-entity id="rig" movement-controls="speed: 2" position="0 0 0" >
+            <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true">
                 <a-sound src="assets/bg_music.mp3" autoplay="true" loop="true" volume="3"></a-sound>
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" laser-controls="hand: left"
                 raycaster="objects: .clickable; far: 10; showLine: true"></a-entity>
             <a-entity oculus-touch-controls="hand: right" laser-controls="hand: right"
                 raycaster="objects: .clickable; far: 10; showLine: true"></a-entity>
+            <a-text id="counter" target="#rig" value="Statues : 0 / 5" position="0 0.3 -1"></a-text>
+
         </a-entity>
     </a-scene>
+    
+    <script>
+        let score = 0;
+        function checkWinCondition() {
+            console.log("Fin du jeu");
+            
+            let scene = document.querySelector("a-entity[camera]") || document.querySelector("a-scene");
+            
+            let oldMessage = document.querySelector("#end-message");
+            if (oldMessage) {
+                oldMessage.parentNode.removeChild(oldMessage);
+            }
+            
+            let message = document.createElement("a-entity");
+            message.setAttribute("id", "end-message");
+            message.setAttribute("position", "0 0.3 -3");
+            
+            if (score >= 5) {
+                console.log("✅ Victoire !");
+                
+                // Message de victoire
+                message.setAttribute("text", {
+                    value: "Tu as recupere tous les objets ! Bravo !",
+                    align: "center",
+                    width: 5,
+                    color: "green",
+                    font: "exo2bold",
+                    
+                });
+            }
+            scene.appendChild(message);}
+            
+            AFRAME.registerComponent('interactive', {
+            init: function () {
+                let counterElement = document.querySelector("#counter");
+                this.el.addEventListener("click", () => {
+                this.el.setAttribute('visible', false);
+                score++;
+                console.log("Objet caché :", this.el);
+                counterElement.setAttribute("value", "Statues : " + score + " / 5");
+                checkWinCondition();
+                });
+                }
+            });
+            
+            </script>
+
 </body>
 
 </html>
