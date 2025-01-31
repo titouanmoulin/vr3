@@ -32,6 +32,7 @@
             <a-asset-entity id="laputa17" src="./assets/Laputa_pilliers.glb"></a-asset-entity>
             <a-asset-entity id="laputa18" src="./assets/Laputa_arbre.glb"></a-asset-entity>
             <a-asset-entity id="laputa19" src="./assets/Laputa_socle.glb"></a-asset-entity>
+            <img id="eau" src="assets/water.jpg">
 
         </a-asset>
 
@@ -56,12 +57,24 @@
             <a-entity gltf-model="#laputa17" shadow></a-entity>
             <a-entity gltf-model="#laputa18" shadow></a-entity>
             <a-entity gltf-model="#laputa19" shadow></a-entity>
+            <a-plane position="-175.973 202 -43.298" scale="20 20 20" material="src: #eau; roughness: 1" rotation="-90 0 0"></a-plane>
+            <a-plane position="-140.327 202 67.936" scale="20 20 20"  rotation="-90 0 0" material="src: #eau; roughness: 1"></a-plane>
+            <a-plane position="-159.761 202 -137.939" scale="20 20 20"  rotation="-90 0 0" material="src: #eau; roughness: 1"></a-plane>
+            <a-plane position="-69.171 202 -163.966" scale="20 20 20"  rotation="-90 0 0" material="src: #eau; roughness: 1"></a-plane>
+            <a-plane position="-14.057 202 -249.230" scale="20 20 20"  rotation="-90 0 0" material="src: #eau; roughness: 1"></a-plane>
+            <a-plane position="-137.414 202 21.225" scale="78.700 42.54 20"  rotation="-90 0 0" material="src: #eau; roughness: 1; repeat: 3 2"></a-plane>
+            <a-plane position="-199.152 202 7.821" scale="25 20 20"  rotation="-90 0 0" material="src: #eau; roughness: 1"></a-plane>
+            <a-plane position="-78.810 202 -55.075" scale="44.376 134.943 20"  rotation="-90 0 0" material="src: #eau; roughness: 1; repeat: 1 4"></a-plane>
+            <a-plane position="16.163 202 -189.275" scale="75.964 196.030 20"  rotation="-90 -43.303 0" material="src: #eau; roughness: 1; repeat: 1 4"></a-plane>
+            <a-plane position="-75.603 202 -218.073" scale="38.226 83.344 20"  rotation="-90 45 0" material="src: #eau; roughness: 1; repeat: 1 3"></a-plane>
+            <!-- <a-water width="2" length="2" scale="50 50 0.1" opacity="1" voronoi-points="8" base-color="#376c9c" position="-175.973 202 -43.298"></a-water> -->
         </a-entity>
+        <!-- <a-water width="200" length="200" scale="8 8 0.1" opacity="1" voronoi-points="5" base-color="#376c9c" position="1336.097 0 1405.688"></a-water> -->
+            
         <!-- <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 0"></a-entity>
              <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 0" rotation="0 90 0"></a-entity>
              <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="0 -4000 0"></a-entity>
              <a-entity gltf-model="#cloud" scale="3000 1000 3000" position="-7000 -4000 -7000" rotation="0 45 0"></a-entity> -->
-
 
         <a-sky material="src: #sky" scale="15 15 15"></a-sky>
 
@@ -69,16 +82,16 @@
         <a-light type="directional" light="castShadow:true;" position="-8 6 -20" intensity="0.5"
             shadow-camera-automatic="#objects"></a-light>
 
-        <a-entity id="rig" movement-controls position="0 0 0">
+        <a-entity id="rig" movement-controls="acceleration: 1000; constrainToNavMesh: true" position="0 0 0" >
             <a-entity camera position="0 1.6 0" look-controls="pointerLockEnabled: true"
-                wasd-controls="fly: true; acceleration: 3000" cursor="rayOrigin: mouse">
-
+            wasd-controls="fly: true ;acceleration: 1000;"
+                >
+                <a-sound src="assets/bg_music.mp3" autoplay="true" loop="true" volume="3"></a-sound>
             </a-entity>
             <a-entity oculus-touch-controls="hand: left" laser-controls="hand: left"
                 raycaster="objects: .clickable; far: 10; showLine: true"></a-entity>
             <a-entity oculus-touch-controls="hand: right" laser-controls="hand: right"
                 raycaster="objects: .clickable; far: 10; showLine: true"></a-entity>
-            <a-entity gltf-model="#necklace" scale="10 10 10" position="0 0 -0.2" rotation="0 180 0"></a-entity>
         </a-entity>
     </a-scene>
 </body>
